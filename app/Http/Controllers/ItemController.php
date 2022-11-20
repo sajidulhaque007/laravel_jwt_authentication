@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\products;
 use DB;
 
 class ItemController extends Controller
@@ -37,6 +38,10 @@ class ItemController extends Controller
                 ->join('files','files.item_id',"=","items.id")
                 ->join('products','products.item_id',"=","items.id")
                 ->get(['items.*','files.file','products.*']);
+        // $result = Item::with(['location','user'])
+        //              ->rightJoin('products','items.id','=','products.item_id')
+        //              ->get();   
+
         return response()->json([               
             "Results" => $result,                
         ]);
